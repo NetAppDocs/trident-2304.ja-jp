@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: trident-managing-k8s/uninstall-trident.html 
+keywords: uninstall, astra trident, methods, operator, tridentctl, helm 
+summary: Astra Trident のインストール方法に応じて、複数の方法でアンインストールできます。 
+---
+= Astra Trident をアンインストール
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident のインストール方法に応じて、複数の方法でアンインストールできます。
+
+
+
+== Helm を使用してアンインストールします
+
+Helmを使用してAstra Tridentをインストールした場合は、を使用してアンインストールできます `helm uninstall`。
+
+[listing]
+----
+#List the Helm release corresponding to the Astra Trident install.
+helm ls -n trident
+NAME          NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+trident       trident         1               2021-04-20 00:26:42.417764794 +0000 UTC deployed        trident-operator-21.07.1        21.07.1
+
+#Uninstall Helm release to remove Trident
+helm uninstall trident -n trident
+release "trident" uninstalled
+----
+
+
+== Trident オペレータを使用してをアンインストールします
+
+Operator を使用して Astra Trident をインストールした場合、次のいずれかの方法で Trident をアンインストールできます。
+
+* **編集 `TridentOrchestrator` アンインストールフラグを設定するには：**を編集できます `TridentOrchestrator` をクリックして設定します `spec.uninstall=true`。を編集します `TridentOrchestrator` CRおよびを設定します `uninstall` 次のようなフラグを設定します。
++
+[listing]
+----
+kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"uninstall":true}}'
+----
++
+をクリックします `uninstall` フラグはに設定されています `true`は、TridentオペレータがTridentをアンインストールしますが、TridentOrchestrator自体は削除されません。必要に応じて、TridentOrchestratorをクリーンアップし、新しいTridentOrchestratorを作成する必要があります。
+Tridentをもう一度インストールします。
+
+* **削除 `TridentOrchestrator`:**を削除する `TridentOrchestrator` Astra Tridentの導入に使用したCRでは、Tridentをアンインストールするようオペレータに指示します。オペレータがの削除を処理します `TridentOrchestrator` さらに、Astra Tridentの導入とデプロイを削除し、インストールの一部として作成したTridentポッドを削除します。
+Astra Tridentを完全に削除し（作成したCRDを含む）、スレートを効果的に消去するには、編集します `TridentOrchestrator` を渡します `wipeout` オプション次の例を参照してください。
+
+
+[listing]
+----
+kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"wipeout":["crds"],"uninstall":true}}'
+----
+Astra Trident が完全にアンインストールされ、管理対象のバックエンドとボリュームに関連するすべてのメタデータがクリアされます。以降のインストールは新規インストールとして扱われます。
+
+
+WARNING: 完全なアンインストールを実行する場合にのみ、 CRD の消去を検討してください。この操作は元に戻せません。** 最初からやり直す必要がある場合や、 Astra Trident の新規インストールを作成する場合を除き、 CRD を消去しないでください **
+
+
+
+== を使用してをアンインストールします `tridentctl`
+
+を実行します `uninstall` のコマンド `tridentctl` 次のように、Astra Tridentに関連付けられているすべてのリソースを削除します。ただし、CRDと関連オブジェクトは削除されます。そのため、インストーラを再実行して、より新しいバージョンに簡単に更新できます。
+
+[listing]
+----
+./tridentctl uninstall -n <namespace>
+----
+Astra Trident の完全な削除を実行するには、 Astra Trident によって作成された CRD のフィナライザを削除し、 CRD を削除する必要があります。

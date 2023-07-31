@@ -1,0 +1,55 @@
+---
+settings:
+  name: Astra Trident
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  rss_page: trident-rn.html
+  versions:
+  - name: Astra Trident
+    url: "/trident"
+    version-number: '23.07'
+  - name: Astra Trident
+    url: "/trident-2301"
+    version-number: '23.01'
+  - name: Astra Trident
+    url: "/trident-2210"
+    version-number: '22.10'
+  - name: Astra Trident
+    url: "/trident-2207"
+    version-number: '22.07'
+  - name: Astra Trident
+    url: "/trident-2204"
+    version-number: '22.04'
+  langs: ja-jp,us-en,ko-kr,zh-cn,zh-tw,de-de,es-es,fr-fr,it-it
+sidebar:
+  entries:
+  - title: Astra Trident のドキュメント
+    url: "/index.html"
+  - title: リリースノート
+    entries:
+    - title: 新機能
+      url: "/trident-rn.html"
+    - title: 以前のバージョン
+      url: "/earlier-versions.html"
+  - section: trident-concepts
+  - section: trident-get-started
+  - section: trident-managing-k8s
+  - section: trident-use
+  - section: trident-docker
+  - title: よくある質問です
+    url: "/faq.html"
+  - title: サポート
+    url: "/get-help.html"
+  - title: トラブルシューティング
+    url: "/troubleshooting.html"
+  - section: trident-reco
+  - section: trident-reference
+  - title: 法的通知
+    url: "/legal-notices.html"
+product-family:
+  name: Astra
+  repo: astra-family
+  sidebar_label: すべてのAstraドキュメント

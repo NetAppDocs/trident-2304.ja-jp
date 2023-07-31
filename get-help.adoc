@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: get-help.html 
+keywords: get help, get support, knowledgebase, discord, phone, web, ticket, contact support, support ticket 
+summary: ネットアップでは、さまざまな方法で Trident をサポートしています。ディスコード・チャネルなど、24時間365日利用可能な広範な無料セルフ・サポート・オプションをご用意しています。 
+---
+= サポート
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Astra Trident は、正式にサポートされているネットアップのプロジェクトです。任意の標準メカニズムを使用してネットアップに連絡し、必要なエンタープライズクラスのサポートを受けることができます。
+
+また、ネットアップのアストラには、コンテナユーザ（Astra Trident開発者を含む）の活気あるパブリックコミュニティもあります link:https://discord.gg/NetApp["チャネルを外します"^]。プロジェクトに関する一般的な質問をしたり、同じような気のある同僚と関連するトピックについて話し合うのには、この場所が最適です。
